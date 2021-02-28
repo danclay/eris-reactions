@@ -16,7 +16,7 @@ Simply install Eris Reactions via NPM `npm install eris-reactions` and require i
 ReactionHandler.collectReactions(message, filter, options);
 ```
 - **Eris.Message** `message` - *An Eris message emitted from the `messageCreate` event.*
-- **Function** `filter` - *A filter function which is passed a **userID** as a Discord Snowflake.*
+- **Function** `filter` - *A filter function which is passed a **userID** as a Discord Snowflake and the emoji passed as an object in the same format as `resultObject.emoji` below*
 - **Object** `options` - *An object containing following options:*
     - **Number** `options.maxMatches` - *The maximum amount of reactions to collect.*
     - **Number** `options.time` - *The maximum amount of time the collector should run for in milliseconds.*
@@ -36,7 +36,7 @@ The result is an **Array** of `resultObject` containing all collected reaction r
 new ReactionHandler.continuousReactionStream(message, filter, permanent, options);
 ```
 - **Eris.Message** `message` - *An Eris message emitted from the `messageCreate` event.*
-- **Function** `filter` - *A filter function which is passed a **userID** as a Discord Snowflake.*
+- **Function** `filter` - *A filter function which is passed a **userID** as a Discord Snowflake and the emoji passed as an object in the same format as `eventObject.emoji` below*
 - **Boolean** `permanent` - *Whether or not the listener should stay attached or be automatically removed after use.*
 - **Object** `options` - *An object containing following options:*
     - **Number** `options.maxMatches` - *The maximum amount of reactions to collect.*
@@ -98,7 +98,7 @@ bot.on('messageCreate', async (message) => {
         // This will continuously listen for 100 incoming reactions over the course of 15 minutes
         const reactionListener = new ReactionHandler.continuousReactionStream(
             message, 
-            (userID) => userID === message.author.id, 
+            (userID, emoji) => userID === message.author.id  && emoji.name === '😀', 
             false, 
             { maxMatches: 100, time: 900000 }
         );
