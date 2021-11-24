@@ -27,5 +27,7 @@
     "url": "https://github.com/riyacchi/eris-reactions/issues"
   },
   "homepage": "https://github.com/riyacchi/eris-reactions#readme",
-  "dependencies": {}
+  "peerDependencies": {
+	  "eris": "~0.16.0"
+  }
 }
